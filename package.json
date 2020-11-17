@@ -19,6 +19,8 @@
   },
   "homepage": "https://github.com/cutePanda123/xiaomi-video-player#readme",
   "devDependencies": {
+    "css-loader": "^5.0.1",
+    "style-loader": "^2.0.0",
     "webpack": "^5.5.0",
     "webpack-cli": "^4.2.0"
   }
