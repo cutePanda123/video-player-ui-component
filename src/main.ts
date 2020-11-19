@@ -1,7 +1,12 @@
-import abc from './test';
-import './style.css';
+import './main.css';
 
-let a : string = 'Nov, 2020';
+let videos = document.querySelectorAll('#video-list li');
 
-console.log(abc);
+videos.forEach((video) => {
+    video.addEventListener('click', function() {
+        let url : string = this.dataset.url;
+        let title : string = this.dataset.title;
+        console.log(url, title);
+    });
+});
 
