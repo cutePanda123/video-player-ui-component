@@ -36,3 +36,52 @@
     content: "\e9cf";
   }
   
+  body {
+    height: 2000px;
+  }
+
+  ul {
+    list-style: none;
+  }
+
+  img {
+    display: block;
+  }
+
+  .clearfix::after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+
+  #video-list {
+    width: 800px;
+    margin: 20px auto;
+  }
+
+  #video-list .list-wrap {
+
+  }
+
+  #video-list .list-wrap li {
+    float: left;
+    width: 352px;
+    height: auto;
+  
+  }
+
+  #video-list .list-wrap div {
+
+  }
+
+  #video-list .list-wrap img {
+
+  }
+
+  #video-list .list-wrap i {
+
+  }
+
+  #video-list .list-wrap h3 {
+
+  }
