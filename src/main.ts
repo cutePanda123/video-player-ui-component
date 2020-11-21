@@ -1,5 +1,5 @@
 import './main.css';
-import popup from './componments/popup/popup';
+import popup from './components/popup/popup';
 
 let videos = document.querySelectorAll('#video-list li');
 

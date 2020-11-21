@@ -1,3 +1,6 @@
+//let styles = require('./popup.css');  need to use styles.default.popup to access
+import styles from './popup.css'
+
 interface IPopupOption {
     width?: string;
     height?: string;
@@ -45,8 +48,9 @@ class Popup implements IComponent {
     handle() {}
 
     template() {
-        this.templateContainer = document.createElement('div')
-        this.templateContainer.innerHTML = `<h1>hello</h1>`;
+        this.templateContainer = document.createElement('div');
+        //this.templateContainer.innerHTML = `<h1 class="${styles.default.popup}">hello</h1>`;
+        this.templateContainer.innerHTML = `<h1 class="${styles.popup}">hello</h1>`;
         document.body.appendChild(this.templateContainer);
     }
 }
