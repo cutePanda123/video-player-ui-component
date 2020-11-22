@@ -9,7 +9,11 @@ videos.forEach((video) => {
         let title : string = this.dataset.title;
         console.log(url, title);
 
-        popup({});
+        popup({
+            width: '880px',
+            height: '556px',
+            title: title
+        });
     });
 });
 

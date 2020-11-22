@@ -1,5 +1,5 @@
-//let styles = require('./popup.css');  need to use styles.default.popup to access
-import styles from './popup.css'
+let styles = require('./popup.css'); // need to use styles.default to access
+//import styles from './popup.css'
 
 interface IPopupOption {
     width?: string;
@@ -49,9 +49,31 @@ class Popup implements IComponent {
 
     template() {
         this.templateContainer = document.createElement('div');
+        this.templateContainer.style.width = this.option.width;
+        this.templateContainer.style.height = this.option.height;
+        this.templateContainer.className = styles.default.popup;
+
         //this.templateContainer.innerHTML = `<h1 class="${styles.default.popup}">hello</h1>`;
-        this.templateContainer.innerHTML = `<h1 class="${styles.popup}">hello</h1>`;
+        this.templateContainer.innerHTML = `
+            <div class="${styles.default['popup-title']}">
+                <h3>${this.option.title}</h3>
+                <i class="iconfont icon-baseline-close-px"></i>
+            </div>
+            <div class=${styles.default['popup-content']}>
+
+            </div>
+        `;
         document.body.appendChild(this.templateContainer);
+        if (this.option.pos === 'left') {
+            this.templateContainer.style.left = '0';
+            this.templateContainer.style.top = (window.innerHeight - this.templateContainer.offsetHeight) + 'px';
+        } else if (this.option.pos === 'right') {
+            this.templateContainer.style.right = '0';
+            this.templateContainer.style.top = (window.innerHeight - this.templateContainer.offsetHeight) + 'px';
+        } else {
+            this.templateContainer.style.left = (window.innerWidth - this.templateContainer.offsetWidth) / 2 + 'px';
+            this.templateContainer.style.top = (window.innerHeight - this.templateContainer.offsetHeight) / 2 + 'px';
+        }
     }
 }
 
