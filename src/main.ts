@@ -13,7 +13,10 @@ videos.forEach((video) => {
             width: '880px',
             height: '556px',
             title: title,
-            mask: true
+            mask: true,
+            contentCallback: (content: HTMLElement) => {
+                console.log(content);
+            }
         });
     });
 });

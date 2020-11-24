@@ -19,6 +19,8 @@
 
 .popup-title i {
     margin-right: 20px;
+    font-size: 18px;
+    cursor: pointer;
 }
 
 .popup-content {

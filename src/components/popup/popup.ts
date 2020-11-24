@@ -7,7 +7,7 @@ interface IPopupOption {
     title?: string;
     pos?: string;
     mask?: boolean;
-    content?: () => void;
+    contentCallback?: (content: Element) => void;
 }
 
 interface IComponent {
@@ -33,9 +33,7 @@ class Popup implements IComponent {
                 title: '',
                 pos: 'center',
                 mask: true,
-                content: () => {
-                    console.log("testing");    
-                }
+                contentCallback: () => {}
             },
             this.option
         );
@@ -45,9 +43,17 @@ class Popup implements IComponent {
     init() {
         this.template();
         this.option.mask && this.renderMask();
+        this.handle();
+        this.contentCallback();
     }
 
-    handle() {}
+    handle() {
+        let popupCloseButton = this.templateContainer.querySelector(`.${styles.default['popup-title']} i`);
+        popupCloseButton.addEventListener('click', () => {
+            document.body.removeChild(this.templateContainer);
+            this.option.mask && document.body.removeChild(this.mask);
+        });
+    }
 
     template() {
         this.templateContainer = document.createElement('div');
@@ -83,6 +89,11 @@ class Popup implements IComponent {
         this.mask.className = styles.default.mask;
         this.mask.style.height = document.body.offsetHeight + 'px';
         document.body.appendChild(this.mask);
+    }
+
+    contentCallback() {
+        let popupContent = this.templateContainer.querySelector(`.${styles.default['popup-content']}`);
+        this.option.contentCallback(popupContent);
     }
 }
 
