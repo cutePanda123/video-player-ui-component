@@ -12,7 +12,8 @@ videos.forEach((video) => {
         popup({
             width: '880px',
             height: '556px',
-            title: title
+            title: title,
+            mask: true
         });
     });
 });

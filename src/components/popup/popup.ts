@@ -11,7 +11,7 @@ interface IPopupOption {
 }
 
 interface IComponent {
-    templateContainer : HTMLElement;
+    templateContainer: HTMLElement;
     init: () => void;
     handle: () => void;
     template: () => void;
@@ -22,7 +22,8 @@ function popup(option : IPopupOption) {
 }
 
 class Popup implements IComponent {
-    templateContainer : HTMLElement;
+    templateContainer: HTMLElement;
+    mask: HTMLElement;
 
     constructor(private option : IPopupOption) {
         this.option = Object.assign(
@@ -43,6 +44,7 @@ class Popup implements IComponent {
 
     init() {
         this.template();
+        this.option.mask && this.renderMask();
     }
 
     handle() {}
@@ -74,6 +76,13 @@ class Popup implements IComponent {
             this.templateContainer.style.left = (window.innerWidth - this.templateContainer.offsetWidth) / 2 + 'px';
             this.templateContainer.style.top = (window.innerHeight - this.templateContainer.offsetHeight) / 2 + 'px';
         }
+    }
+
+    renderMask() {
+        this.mask = document.createElement('div');
+        this.mask.className = styles.default.mask;
+        this.mask.style.height = document.body.offsetHeight + 'px';
+        document.body.appendChild(this.mask);
     }
 }
 
