@@ -1,3 +1,4 @@
+import IComponent from '../common/component';
 let styles = require('./popup.css'); // need to use styles.default to access
 //import styles from './popup.css'
 
@@ -8,13 +9,6 @@ interface IPopupOption {
     pos?: string;
     mask?: boolean;
     contentCallback?: (content: Element) => void;
-}
-
-interface IComponent {
-    templateContainer: HTMLElement;
-    init: () => void;
-    handle: () => void;
-    template: () => void;
 }
 
 function popup(option : IPopupOption) {
@@ -41,13 +35,13 @@ class Popup implements IComponent {
     }
 
     init() {
-        this.template();
+        this.createDomTemplate();
         this.option.mask && this.renderMask();
-        this.handle();
+        this.registerHandlers();
         this.contentCallback();
     }
 
-    handle() {
+    registerHandlers() {
         let popupCloseButton = this.templateContainer.querySelector(`.${styles.default['popup-title']} i`);
         popupCloseButton.addEventListener('click', () => {
             document.body.removeChild(this.templateContainer);
@@ -55,7 +49,7 @@ class Popup implements IComponent {
         });
     }
 
-    template() {
+    createDomTemplate() {
         this.templateContainer = document.createElement('div');
         this.templateContainer.style.width = this.option.width;
         this.templateContainer.style.height = this.option.height;
