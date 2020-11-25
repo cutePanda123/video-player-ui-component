@@ -1,5 +1,6 @@
 import './main.css';
 import popup from './components/popup/popup';
+import player from './components/video-player/player';
 
 let videos = document.querySelectorAll('#video-list li');
 
@@ -16,6 +17,10 @@ videos.forEach((video) => {
             mask: true,
             contentCallback: (content: HTMLElement) => {
                 console.log(content);
+                player({
+                    url: url,
+                    domAttachedPoint: content
+                });
             }
         });
     });
