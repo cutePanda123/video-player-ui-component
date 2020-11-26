@@ -44,7 +44,7 @@ class Player implements IComponent {
                 <div class="${styles.default['player-progress']}">
                     <div class="${styles.default['progress-watched']}"></div>
                     <div class="${styles.default['progress-buffered']}"></div>
-                    <div class="${styles.default['progress-unwatched']}"></div>
+                    <div class="${styles.default['progress-bar']}"></div>
                 </div>
                 <div class="${styles.default['play-button']}">
                     <i class="iconfont icon-Play"></i>
@@ -56,7 +56,7 @@ class Player implements IComponent {
                     <i class="iconfont icon-sound"></i>
                     <div class="${styles.default['volume-control']}">
                         <div class="${styles.default['volume-now']}"></div>
-                        <div class="${styles.default['volume-available']}"></div>
+                        <div class="${styles.default['volume-bar']}"></div>
                 </div>
                 <div class="${styles.default['fullscreen']}">
                     <i class="iconfont icon-Fullscreenmaximizeexpand"></i>
