@@ -108,6 +108,24 @@ class Player implements IComponent {
             videoContent.requestFullscreen();
         });
 
+        videoProgressBarDivs[2].addEventListener('mousedown', function (downEvent: MouseEvent) {
+            let downX = downEvent.pageX;
+            let downOffset = this.offsetLeft;
+            document.onmousemove = (moveEvent : MouseEvent) => {
+                let ratio = (moveEvent.pageX - downX + downOffset + 8) / this.parentElement.offsetWidth;
+                ratio = Math.max(ratio, 0);
+                ratio = Math.min(ratio, 1);
+                videoProgressBarDivs[0].style.width = (ratio * 100) + '%';
+                videoProgressBarDivs[1].style.width = (ratio * 100) + '%';
+                this.style.left = (ratio * 100) + '%';
+                videoContent.currentTime = ratio * videoContent.duration;
+            };
+            document.onmouseup = () => {
+                document.onmousemove = document.onmouseup = null;
+            };
+            downEvent.preventDefault();
+        });
+
         function formatVideoDuration(duration: number): string {
             let min: number = Math.floor(Math.round(duration) / 60);
             let second: number = Math.round(duration) % 60;
