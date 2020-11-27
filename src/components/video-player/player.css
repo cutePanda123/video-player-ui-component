@@ -64,7 +64,8 @@
 
 .play-button i {
     font-size: 20px;
-    color: white
+    color: white;
+    cursor: pointer;
 }
 
 .progress-time {
@@ -123,5 +124,6 @@
 
 .fullscreen i {
     font-size: 20px;
-    color: white
+    color: white;
+    cursor: pointer;
 }

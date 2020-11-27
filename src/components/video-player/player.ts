@@ -74,6 +74,7 @@ class Player implements IComponent {
         let videoContent: HTMLVideoElement = this.templateContainer.querySelector(`.${styles.default['player-content']}`);
         let videoPlayButton = this.templateContainer.querySelector(`.${styles.default['play-button']} i`);
         let videoProgressTimeSpans = this.templateContainer.querySelectorAll(`.${styles.default['progress-time']} span`);
+        let videoFullscreenButton = this.templateContainer.querySelector(`.${styles.default['fullscreen']} i`);
         let videoProgressTimer = null;
         videoContent.addEventListener('canplay', (event) => {
             event.preventDefault();
@@ -99,6 +100,11 @@ class Player implements IComponent {
             } else {
                 videoContent.pause();
             }
+        });
+
+        videoFullscreenButton.addEventListener('click', (event) => {
+            event.preventDefault();
+            videoContent.requestFullscreen();
         });
 
         function formatVideoDuration(duration: number): string {
