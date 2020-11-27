@@ -86,7 +86,7 @@ class Player implements IComponent {
             videoContent.play();
             videoContent.volume = 0;
             videoVolumeBarDivs[0].style.width = '0';
-            videoVolumeBarDivs[1].style.width = '0';
+            videoVolumeBarDivs[1].style.left = '0';
         }
 
         this.templateContainer.addEventListener('mouseenter', function(event: MouseEvent) {
