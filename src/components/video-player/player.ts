@@ -81,6 +81,14 @@ class Player implements IComponent {
         let videoProgressTimer = null;
         videoContent.volume = 0.5;
 
+        if (this.option.autoplay) {
+            videoProgressTimer = setInterval(updateVideoProgress, 1000);
+            videoContent.play();
+            videoContent.volume = 0;
+            videoVolumeBarDivs[0].style.width = '0';
+            videoVolumeBarDivs[1].style.width = '0';
+        }
+
         this.templateContainer.addEventListener('mouseenter', function(event: MouseEvent) {
             videoControl.style.bottom = '0';
         });

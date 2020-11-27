@@ -19,7 +19,8 @@ videos.forEach((video) => {
                 console.log(content);
                 player({
                     url: url,
-                    domAttachedPoint: content
+                    domAttachedPoint: content,
+                    autoplay: true
                 });
             }
         });
