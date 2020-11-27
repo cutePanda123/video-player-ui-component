@@ -1,6 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
     entry: './src/main.ts',
@@ -19,14 +20,14 @@ module.exports = {
         rules: [
             {
                 test: /\.css$/,
-                use: ['style-loader', 'css-loader'],
+                use: [MiniCssExtractPlugin.loader, 'css-loader'],
                 exclude: [
                     path.resolve(__dirname, 'src/components')
                 ]
             },
             {
                 test: /\.css$/,
-                use: ['style-loader', {
+                use: [MiniCssExtractPlugin.loader, {
                     loader: 'css-loader',
                     options: {
                         modules: {
@@ -60,7 +61,8 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: "./src/index.html"
         }),
-        new CleanWebpackPlugin()
+        new CleanWebpackPlugin(),
+        new MiniCssExtractPlugin()
     ],
     mode: "production"
 };
