@@ -71,7 +71,27 @@ class Player implements IComponent {
     }
 
     registerHandlers() {
+        let videoContent: HTMLVideoElement = this.templateContainer.querySelector(`.${styles.default['player-content']}`);
+        let videoPlayButton = this.templateContainer.querySelector(`.${styles.default['play-button']} i`);
+        
+        videoContent.addEventListener('play', (event) => {
+            event.preventDefault();
+            videoPlayButton.className = "iconfont icon-pause";
+        });
 
+        videoContent.addEventListener('pause', (event) => {
+            event.preventDefault();
+            videoPlayButton.className = "iconfont icon-Play";
+        });
+        
+        videoPlayButton.addEventListener('click', (event) => {
+            event.preventDefault();
+            if (videoContent.paused) {
+                videoContent.play();
+            } else {
+                videoContent.pause();
+            }
+        });
     }
 }
 
