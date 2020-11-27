@@ -28,7 +28,7 @@
 .progress-watched {
     position: absolute;
     left: 0;
-    width: 50%;
+    width: 0;
     background-color: #ff6a03;
     height: 100%;
     z-index: 1;
@@ -37,7 +37,7 @@
 .progress-buffered {
     position: absolute;
     left: 0;
-    width: 70%;
+    width: 0;
     background-color: #666;
     height: 100%;
 }

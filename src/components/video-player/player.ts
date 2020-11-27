@@ -75,6 +75,7 @@ class Player implements IComponent {
         let videoPlayButton = this.templateContainer.querySelector(`.${styles.default['play-button']} i`);
         let videoProgressTimeSpans = this.templateContainer.querySelectorAll(`.${styles.default['progress-time']} span`);
         let videoFullscreenButton = this.templateContainer.querySelector(`.${styles.default['fullscreen']} i`);
+        let videoProgressBarDivs: NodeListOf<HTMLElement> = this.templateContainer.querySelectorAll(`.${styles.default['player-progress']} div`);
         let videoProgressTimer = null;
         videoContent.addEventListener('canplay', (event) => {
             event.preventDefault();
@@ -119,6 +120,12 @@ class Player implements IComponent {
 
         function updateVideoProgress() {
             videoProgressTimeSpans[0].innerHTML = formatVideoDuration(videoContent.currentTime);
+
+            let watchedRatio: number = videoContent.currentTime / videoContent.duration;
+            let bufferedRatio: number = videoContent.buffered.end(0) / videoContent.duration;
+            videoProgressBarDivs[0].style.width = (watchedRatio * 100) + '%';
+            videoProgressBarDivs[1].style.width = (bufferedRatio * 100) + '%';
+            videoProgressBarDivs[2].style.left = (watchedRatio * 100) + '%';
         }
     }
 }
