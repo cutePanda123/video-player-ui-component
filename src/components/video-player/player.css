@@ -12,10 +12,11 @@
 .player-control {
     width: 100%;
     position: absolute;
-    bottom: 0;
+    bottom: -50px;
     left: 0;
     height: 50px;
     background: rgba(0, 0, 0, 0.8);
+    transition: 0.5s;
 }
 
 .player-progress {

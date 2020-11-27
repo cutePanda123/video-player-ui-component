@@ -72,6 +72,7 @@ class Player implements IComponent {
 
     registerHandlers() {
         let videoContent: HTMLVideoElement = this.templateContainer.querySelector(`.${styles.default['player-content']}`);
+        let videoControl: HTMLElement = this.templateContainer.querySelector(`.${styles.default['player-control']}`);
         let videoPlayButton = this.templateContainer.querySelector(`.${styles.default['play-button']} i`);
         let videoProgressTimeSpans = this.templateContainer.querySelectorAll(`.${styles.default['progress-time']} span`);
         let videoFullscreenButton = this.templateContainer.querySelector(`.${styles.default['fullscreen']} i`);
@@ -79,6 +80,15 @@ class Player implements IComponent {
         let videoVolumeBarDivs: NodeListOf<HTMLElement> = this.templateContainer.querySelectorAll(`.${styles.default['volume-control']} div`);
         let videoProgressTimer = null;
         videoContent.volume = 0.5;
+
+        this.templateContainer.addEventListener('mouseenter', function(event: MouseEvent) {
+            videoControl.style.bottom = '0';
+        });
+
+        this.templateContainer.addEventListener('mouseleave', function(event: MouseEvent) {
+            videoControl.style.bottom = '-50px';
+        });
+
         videoContent.addEventListener('canplay', (event) => {
             event.preventDefault();
             videoProgressTimeSpans[1].innerHTML = formatVideoDuration(videoContent.duration);
