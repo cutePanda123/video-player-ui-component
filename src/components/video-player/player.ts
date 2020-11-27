@@ -73,15 +73,23 @@ class Player implements IComponent {
     registerHandlers() {
         let videoContent: HTMLVideoElement = this.templateContainer.querySelector(`.${styles.default['player-content']}`);
         let videoPlayButton = this.templateContainer.querySelector(`.${styles.default['play-button']} i`);
-        
+        let videoProgressTimeSpans = this.templateContainer.querySelectorAll(`.${styles.default['progress-time']} span`);
+        let videoProgressTimer = null;
+        videoContent.addEventListener('canplay', (event) => {
+            event.preventDefault();
+            videoProgressTimeSpans[1].innerHTML = formatVideoDuration(videoContent.duration);
+        });
+
         videoContent.addEventListener('play', (event) => {
             event.preventDefault();
             videoPlayButton.className = "iconfont icon-pause";
+            videoProgressTimer = setInterval(updateVideoProgress, 1000);
         });
 
         videoContent.addEventListener('pause', (event) => {
             event.preventDefault();
             videoPlayButton.className = "iconfont icon-Play";
+            clearInterval(videoProgressTimer);
         });
         
         videoPlayButton.addEventListener('click', (event) => {
@@ -92,6 +100,20 @@ class Player implements IComponent {
                 videoContent.pause();
             }
         });
+
+        function formatVideoDuration(duration: number): string {
+            let min: number = Math.floor(Math.round(duration) / 60);
+            let second: number = Math.round(duration) % 60;
+            return formatTimeNumber(min) + ':' + formatTimeNumber(second);
+        }
+
+        function formatTimeNumber(time: number): string {
+            return time < 10 ? '0' + time : '' + time;
+        }
+
+        function updateVideoProgress() {
+            videoProgressTimeSpans[0].innerHTML = formatVideoDuration(videoContent.currentTime);
+        }
     }
 }
 
