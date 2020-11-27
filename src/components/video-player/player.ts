@@ -76,7 +76,9 @@ class Player implements IComponent {
         let videoProgressTimeSpans = this.templateContainer.querySelectorAll(`.${styles.default['progress-time']} span`);
         let videoFullscreenButton = this.templateContainer.querySelector(`.${styles.default['fullscreen']} i`);
         let videoProgressBarDivs: NodeListOf<HTMLElement> = this.templateContainer.querySelectorAll(`.${styles.default['player-progress']} div`);
+        let videoVolumeBarDivs: NodeListOf<HTMLElement> = this.templateContainer.querySelectorAll(`.${styles.default['volume-control']} div`);
         let videoProgressTimer = null;
+        videoContent.volume = 0.5;
         videoContent.addEventListener('canplay', (event) => {
             event.preventDefault();
             videoProgressTimeSpans[1].innerHTML = formatVideoDuration(videoContent.duration);
@@ -119,6 +121,23 @@ class Player implements IComponent {
                 videoProgressBarDivs[1].style.width = (ratio * 100) + '%';
                 this.style.left = (ratio * 100) + '%';
                 videoContent.currentTime = ratio * videoContent.duration;
+            };
+            document.onmouseup = () => {
+                document.onmousemove = document.onmouseup = null;
+            };
+            downEvent.preventDefault();
+        });
+
+        videoVolumeBarDivs[1].addEventListener('mousedown', function (downEvent: MouseEvent) {
+            let downX = downEvent.pageX;
+            let downOffset = this.offsetLeft;
+            document.onmousemove = (moveEvent : MouseEvent) => {
+                let ratio = (moveEvent.pageX - downX + downOffset + 8) / this.parentElement.offsetWidth;
+                ratio = Math.max(ratio, 0);
+                ratio = Math.min(ratio, 1);
+                videoVolumeBarDivs[0].style.width = (ratio * 100) + '%';
+                this.style.left = (ratio * 100) + '%';
+                videoContent.volume = ratio;
             };
             document.onmouseup = () => {
                 document.onmousemove = document.onmouseup = null;
